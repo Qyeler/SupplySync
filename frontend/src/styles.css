@@ -1,0 +1,898 @@
+:root {
+  font-family: "IBM Plex Sans Variable", "Segoe UI", sans-serif;
+  color: #1d2927;
+  background: #edf1f2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #17211f;
+  --ink-soft: #53605e;
+  --paper: #ffffff;
+  --canvas: #edf1f2;
+  --line: #d9e0df;
+  --line-strong: #bdc9c7;
+  --teal: #0b6b5d;
+  --teal-dark: #075046;
+  --coral: #cf5c49;
+  --amber: #d79b24;
+  --cobalt: #315da8;
+  --muted: #73807e;
+  --sidebar: #17211f;
+  --sidebar-soft: #22312e;
+  --shadow: 0 18px 50px rgb(23 33 31 / 14%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--canvas);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(49 93 168 / 28%);
+  outline-offset: 2px;
+}
+
+button:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 226px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  padding: 22px 14px 16px;
+  color: #ecf4f2;
+  background: var(--sidebar);
+  border-right: 1px solid #2b3b38;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  gap: 10px;
+  padding: 0 8px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: #c8f0e7;
+  background: var(--teal);
+  border: 1px solid #2b887b;
+  border-radius: 6px;
+}
+
+.brand-word {
+  font-size: 18px;
+  font-weight: 550;
+  letter-spacing: 0;
+}
+
+.brand-word strong {
+  color: #8ad6c6;
+  font-weight: 720;
+}
+
+.primary-nav {
+  display: grid;
+  gap: 6px;
+  margin-top: 44px;
+}
+
+.nav-item {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  align-items: center;
+  min-height: 42px;
+  gap: 10px;
+  padding: 0 11px;
+  color: #aebbb8;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+}
+
+.nav-item.is-active {
+  color: #ffffff;
+  background: var(--sidebar-soft);
+  border-color: #344541;
+}
+
+.nav-count {
+  min-width: 23px;
+  padding: 2px 6px;
+  color: #b9cbc7;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-align: center;
+  background: #2d403c;
+  border-radius: 4px;
+}
+
+.sidebar-foot {
+  display: grid;
+  gap: 18px;
+  margin-top: auto;
+}
+
+.connection,
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.connection {
+  padding: 10px;
+  color: #78c9b8;
+  background: #1c2a27;
+  border: 1px solid #2b3b38;
+  border-radius: 6px;
+}
+
+.connection div,
+.profile div {
+  display: grid;
+  min-width: 0;
+}
+
+.connection span,
+.profile span {
+  overflow: hidden;
+  color: #8f9d99;
+  font-size: 11px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.connection strong,
+.profile strong {
+  overflow: hidden;
+  color: #e8f0ee;
+  font-size: 12px;
+  font-weight: 620;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile {
+  padding: 0 6px;
+}
+
+.avatar {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: #ffffff !important;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px !important;
+  background: var(--cobalt);
+  border-radius: 50%;
+}
+
+.workspace {
+  min-width: 0;
+  padding: 28px clamp(22px, 3.2vw, 52px) 48px;
+}
+
+.workspace-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 58px;
+}
+
+.section-kicker,
+.drawer-kicker {
+  display: block;
+  color: var(--teal);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.workspace-header h1 {
+  margin: 3px 0 0;
+  color: var(--ink);
+  font-size: 32px;
+  font-weight: 690;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-control {
+  display: flex;
+  width: min(31vw, 340px);
+  height: 40px;
+  align-items: center;
+  gap: 9px;
+  padding: 0 10px;
+  color: var(--muted);
+  background: #f8faf9;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+}
+
+.search-control:focus-within {
+  background: var(--paper);
+  border-color: var(--cobalt);
+  box-shadow: 0 0 0 3px rgb(49 93 168 / 12%);
+}
+
+.search-control input {
+  min-width: 0;
+  flex: 1;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.search-control input::placeholder {
+  color: #899390;
+}
+
+.search-control button {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+}
+
+.primary-button,
+.secondary-button,
+.quiet-button,
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-button {
+  min-height: 40px;
+  gap: 8px;
+  padding: 0 15px;
+  color: #ffffff;
+  font-weight: 630;
+  white-space: nowrap;
+  background: var(--teal);
+  border: 1px solid var(--teal-dark);
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgb(11 107 93 / 17%);
+}
+
+.primary-button:hover:not(:disabled) {
+  background: var(--teal-dark);
+}
+
+.secondary-button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 14px;
+  color: #245f70;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  background: #eaf3f5;
+  border: 1px solid #b9d3da;
+  border-radius: 5px;
+}
+
+.secondary-button:hover:not(:disabled) {
+  color: #194d5c;
+  background: #dcecef;
+  border-color: #8fb9c3;
+}
+
+.quiet-button {
+  min-height: 34px;
+  gap: 7px;
+  padding: 0 10px;
+  color: #3e4c49;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: 5px;
+}
+
+.quiet-button:hover:not(:disabled) {
+  color: var(--teal-dark);
+  border-color: #87afa7;
+}
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--ink-soft);
+  background: #f5f7f6;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+
+.pulse-strip {
+  display: flex;
+  min-height: 86px;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 34px);
+  margin-top: 28px;
+  padding: 15px 20px;
+  color: #d8e5e2;
+  background: #24322f;
+  border: 1px solid #344541;
+  border-left: 4px solid var(--coral);
+  border-radius: 7px;
+}
+
+.pulse-main {
+  display: grid;
+  gap: 2px;
+  min-width: 165px;
+}
+
+.pulse-filter {
+  min-height: 48px;
+  padding: 7px 9px;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.pulse-filter:hover,
+.pulse-filter.is-active {
+  background: #1c2926;
+  border-color: #4a5d58;
+}
+
+.pulse-filter:focus-visible {
+  outline-color: #9acfc3;
+  outline-offset: 2px;
+}
+
+.pulse-main span,
+.pulse-date {
+  color: #9caaa7;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.pulse-main strong {
+  color: #ffffff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.pulse-divider {
+  width: 1px;
+  height: 42px;
+  background: #465551;
+}
+
+.pulse-stat {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #88cfc0;
+}
+
+.pulse-overdue {
+  color: #ef927f;
+}
+
+.pulse-discrepancy {
+  color: #e3b95f;
+}
+
+.pulse-stat span {
+  display: grid;
+  color: #9caaa7;
+  font-size: 11px;
+}
+
+.pulse-stat strong {
+  color: #edf5f3;
+  font-size: 13px;
+  font-weight: 610;
+}
+
+.pulse-date {
+  margin-left: auto;
+  color: #c3cecb;
+  white-space: nowrap;
+}
+
+.status-rail {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr) 116px;
+  min-height: 112px;
+  margin-top: 18px;
+  padding: 16px 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.rail-intro {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 3px;
+  padding: 0 18px 0 0;
+  color: var(--ink-soft);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--line);
+}
+
+.rail-intro span {
+  font-size: 12px;
+  font-weight: 560;
+}
+
+.rail-intro strong {
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.rail-intro.is-active span {
+  color: var(--teal);
+}
+
+.rail-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(110px, 1fr));
+  align-items: center;
+  padding-left: 26px;
+  overflow-x: auto;
+}
+
+.rail-stop {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  min-width: 110px;
+  padding: 11px 12px 11px 0;
+  color: var(--ink-soft);
+  text-align: left;
+  background: transparent;
+  border: 0;
+}
+
+.rail-stop:hover .rail-copy span,
+.rail-stop.is-active .rail-copy span {
+  color: var(--ink);
+}
+
+.rail-node {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  color: #53615e;
+  background: #edf1f0;
+  border: 2px solid #cad3d1;
+  border-radius: 50%;
+}
+
+.rail-stop.is-active .rail-node {
+  color: #ffffff;
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  box-shadow: 0 0 0 4px rgb(49 93 168 / 12%);
+}
+
+.rail-stop.status-sent.is-active .rail-node {
+  background: var(--coral);
+  border-color: var(--coral);
+  box-shadow: 0 0 0 4px rgb(207 92 73 / 12%);
+}
+
+.rail-stop.status-confirmed.is-active .rail-node {
+  color: #3d2b00;
+  background: #e2b64c;
+  border-color: #e2b64c;
+  box-shadow: 0 0 0 4px rgb(215 155 36 / 14%);
+}
+
+.rail-stop.status-delivered.is-active .rail-node {
+  background: var(--teal);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgb(11 107 93 / 12%);
+}
+
+.rail-cancelled {
+  align-self: center;
+  margin-left: 12px;
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+}
+
+.rail-cancelled.is-active .rail-node {
+  background: #7d5550;
+  border-color: #7d5550;
+  box-shadow: 0 0 0 4px rgb(125 85 80 / 12%);
+}
+
+.rail-copy {
+  display: grid;
+  min-width: 0;
+}
+
+.rail-copy span {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 560;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rail-copy strong {
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.rail-line {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 0;
+  left: 28px;
+  height: 2px;
+  background: #dce3e1;
+  transform: translateY(-50%);
+}
+
+.orders-section {
+  margin-top: 26px;
+}
+
+.orders-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 38px;
+  margin-bottom: 10px;
+}
+
+.orders-heading > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.orders-heading h2,
+.line-items-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.orders-heading span,
+.line-items-heading span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.catalog-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: #e7ecea;
+  border-radius: 6px;
+}
+
+.catalog-availability button {
+  min-height: 30px;
+  padding: 0 10px;
+  color: #66726f;
+  font-size: 11px;
+  font-weight: 620;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+}
+
+.catalog-availability button:hover,
+.catalog-availability button.is-active {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 0 1px 2px rgb(21 39 35 / 10%);
+}
+
+.catalog-availability strong {
+  margin-left: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 550;
+}
+
+.orders-table-wrap {
+  overflow: hidden;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.orders-table th {
+  height: 40px;
+  padding: 0 14px;
+  color: #697572;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  background: #f4f7f6;
+  border-bottom: 1px solid var(--line);
+}
+
+.orders-table th:nth-child(1) {
+  width: 15%;
+}
+
+.orders-table th:nth-child(2) {
+  width: 19%;
+}
+
+.orders-table th:nth-child(3) {
+  width: 21%;
+}
+
+.orders-table th:nth-child(4) {
+  width: 13%;
+}
+
+.orders-table th:nth-child(5) {
+  width: 14%;
+}
+
+.orders-table th:nth-child(6) {
+  width: 18%;
+}
+
+.orders-table td {
+  height: 74px;
+  padding: 10px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #e4e9e8;
+}
+
+.orders-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.orders-table tbody tr:hover {
+  background: #f8faf9;
+}
+
+.orders-table td > span,
+.orders-table td > strong {
+  display: block;
+}
+
+.align-right {
+  text-align: right !important;
+}
+
+.order-number {
+  color: var(--cobalt);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.order-number-button {
+  padding: 0;
+  text-align: left;
+  background: transparent;
+  border: 0;
+}
+
+.order-number-button:hover {
+  color: #234d92;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.order-created,
+.supplier-contact,
+.items-more,
+.delivery-year {
+  margin-top: 4px;
+  overflow: hidden;
+  color: #7b8784;
+  font-size: 11px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.supplier-name,
+.items-summary {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 610;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.items-summary {
+  font-weight: 500;
+}
+
+.delivery-date {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 620;
+}
+
+.delivery-date.urgency-today {
+  color: var(--coral);
+}
+
+.delivery-date.urgency-overdue {
+  color: #a53e32;
+}
+
+.order-amount {
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-select,
+.status-pill {
+  --status-color: #687471;
+  --status-bg: #edf1f0;
+}
+
+.status-draft {
+  --status-color: #315da8;
+  --status-bg: #e9eef8;
+}
+
+.status-sent {
+  --status-color: #a54436;
+  --status-bg: #faeae7;
+}
+
+.status-confirmed {
+  --status-color: #825900;
+  --status-bg: #faf0d6;
+}
+
+.status-delivered {
+  --status-color: #086053;
+  --status-bg: #e1f2ee;
+}
+
+.status-cancelled {
+  --status-color: #697472;
+  --status-bg: #ebefee;
+}
+
+.status-select {
+  display: inline-flex !important;
+  width: 100%;
+  max-width: 145px;
+  height: 32px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 8px;
+  color: var(--status-color);
+  background: var(--status-bg);
+  border: 1px solid color-mix(in srgb, var(--status-color) 22%, transparent);
+  border-radius: 5px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  background: var(--status-color);
+  border-radius: 50%;
+}
+
+.status-select select {
+  min-width: 0;
+  flex: 1;
+  color: var(--status-color);
+  font-size: 11px;
+  font-weight: 650;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  appearance: none;
+}
+
+.status-select > svg:laïn{¶‰žËkºwµçeÁÐµ™½É´¥¹ÁÕÐé‘¥Í…‰±•°(¹É••¥ÁÐµ™½É´Ñ•áÑ…É•„é‘¥Í…‰±•ì(€½±½Èè€ŒÐÐÔÄÑ˜ì(€‰…­É½Õ¹è€˜É˜Õ˜Ðì(€½Á…¥Ñäè€Äì)ô((¹É••¥ÁÐµ¡•…‘¥¹œì(€Á…‘‘¥¹œµÑ½Àè€Àì)ô((¹É••¥ÁÐµ¡•…‘¥¹œ€øÍÙœì(€½±½ÈèÙ…È ´µ½‰…±Ð¤ì)ô((¹É••¥ÁÐµ±¥¹•Ìì(€‘¥ÍÁ±…äèÉ¥ì(€…Àè€ÄÁÁàì)ô((¹É••¥ÁÐµ±¥¹”ì(€Á…‘‘¥¹œè€ÄÉÁàì(€‰…­É½Õ¹èÙ…È ´µÁ…Á•È¤ì(€‰½É‘•Èè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€‰½É‘•Èµ±•™Ðè€ÍÁàÍ½±¥Ù…È ´µÑ•…°¤ì(€‰½É‘•ÈµÉ…‘¥ÕÌè€ÙÁàì)ô((¹É••¥ÁÐµ±¥¹”¹¡…Ìµ‘¥ÍÉ•Á…¹äì(€‰…­É½Õ¹è€™™™…™„ì(€‰½É‘•Èµ½±½Èè€•…ÝÌì(€‰½É‘•Èµ±•™Ðµ½±½ÈèÙ…È ´µ½É…°¤ì)ô((¹É••¥ÁÐµ±¥¹”€ø¡•…‘•Èì(€‘¥ÍÁ±…äè™±•àì(€µ¥¸µÝ¥‘Ñ è€Àì(€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€©ÕÍÑ¥™äµ½¹Ñ•¹ÐèÍÁ…”µ‰•ÑÝ••¸ì(€…Àè€ÄÉÁàì(€µ…É¥¸µ‰½ÑÑ½´è€ÄÁÁàì)ô((¹É••¥ÁÐµ±¥¹”€ø¡•…‘•È€ø‘¥Øì(€‘¥ÍÁ±…äè™±•àì(€µ¥¸µÝ¥‘Ñ è€Àì(€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€…Àè€åÁàì)ô((¹É••¥ÁÐµ±¥¹”€ø¡•…‘•ÈÍÑÉ½¹œì(€½Ù•É™±½Üè¡¥‘‘•¸ì(€½±½ÈèÙ…È ´µ¥¹¬¤ì(€™½¹ÐµÍ¥é”è€ÄÍÁàì(€™½¹ÐµÝ•¥¡Ðè€ØÈÀì(€Ñ•áÐµ½Ù•É™±½Üè•±±¥ÁÍ¥Ìì(€Ý¡¥Ñ”µÍÁ…”è¹½ÝÉ…Àì)ô((¹É••¥ÁÐµ±¥¹”µÍÑ…Ñ”ì(€™±•àè€À€À…ÕÑ¼ì(€Á…‘‘¥¹œè€ÑÁà€ÝÁàì(€½±½ÈèÙ…È ´µÑ•…°µ‘…É¬¤ì(€™½¹ÐµÍ¥é”è€åÁàì(€™½¹ÐµÝ•¥¡Ðè€ØÔÀì(€‰…­É½Õ¹è€”Ñ˜Å•ì(€‰½É‘•ÈµÉ…‘¥ÕÌè€ÑÁàì)ô((¹É••¥ÁÐµ±¥¹”µÍÑ…Ñ”¹¥ÌµÙ…É¥…¹”ì(€½±½Èè€ŒäØÍ”ÌÈì(€‰…­É½Õ¹è€˜å”Ý”Ðì)ô((¹É••¥ÁÐµÙ…±Õ•Ìì(€‘¥ÍÁ±…äèÉ¥ì(€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð Ð°µ¥¹µ…à À°€Å™È¤¤ì(€…±¥¸µ¥Ñ•µÌè•¹ì(€…Àè€áÁàì)ô((¹É••¥ÁÐµÉ•…‘½ÕÐì(€‘¥ÍÁ±…äèÉ¥ì(€µ¥¸µÝ¥‘Ñ è€Àì(€µ¥¸µ¡•¥¡Ðè€ÐÁÁàì(€…±¥¸µ½¹Ñ•¹Ðè•¹Ñ•Èì(€…Àè€ÍÁàì(€Á…‘‘¥¹œè€ÕÁà€åÁàì(€‰…­É½Õ¹è€˜É˜Õ˜Ðì(€‰½É‘•Èè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€‰½É‘•ÈµÉ…‘¥ÕÌè€ÕÁàì)ô((¹É••¥ÁÐµÉ•…‘½ÕÐÍÁ…¸ì(€½±½ÈèÙ…È ´µµÕÑ•¤ì(€™½¹ÐµÍ¥é”è€åÁàì)ô((¹É••¥ÁÐµÉ•…‘½ÕÐÍÑÉ½¹œì(€½Ù•É™±½Üè¡¥‘‘•¸ì(€½±½ÈèÙ…È ´µ¥¹¬¤ì(€™½¹Ðµ™…µ¥±äè€‰%	4A±•à5½¹¼ˆ°µ½¹½ÍÁ…”ì(€™½¹ÐµÍ¥é”è€ÄÉÁàì(€™½¹ÐµÝ•¥¡Ðè€ÔÈÀì(€Ñ•áÐµ½Ù•É™±½Üè•±±¥ÁÍ¥Ìì(€Ý¡¥Ñ”µÍÁ…”è¹½ÝÉ…Àì)ô((¹É••¥ÁÐµÙ…É¥…¹”¹¥ÌµÙ…É¥…¹”ì(€‰…­É½Õ¹è€™…•…”Üì(€‰½É‘•Èµ½±½Èè€•™‰ŒÔì)ô((¹É••¥ÁÐµÙ…É¥…¹”¹¥ÌµÙ…É¥…¹”ÍÑÉ½¹œì(€½±½Èè€ŒäØÍ”ÌÈì)ô((¹É••¥ÁÐµÉ•…Í½¸ì(€µ…É¥¸µÑ½Àè€ÄÁÁàì)ô((¹É••¥ÁÐµÉ•…Í½¸Ñ•áÑ…É•„ì(€µ¥¸µ¡•¥¡Ðè€ÔáÁàì(€±¥¹”µ¡•¥¡Ðè€Ä¸ÌÔì)ô((¹É••¥ÁÐµ™½½Ñ•Èì(€…±¥¸µ¥Ñ•µÌè™±•àµ•¹ì)ô((¹É••¥ÁÐµÑ½Ñ…°ì(€‘¥ÍÁ±…äèÉ¥ì(€…Àè€ÅÁàì)ô((¹É••¥ÁÐµÑ½Ñ…°€øÍÁ…¸°(¹É••¥ÁÐµÑ½Ñ…°€øÍµ…±°ì(€½±½ÈèÙ…È ´µµÕÑ•¤ì(€™½¹ÐµÍ¥é”è€ÄÁÁàì)ô((¹É••¥ÁÐµÑ½Ñ…°ÍÑÉ½¹œì(€½±½ÈèÙ…È ´µ¥¹¬¤ì(€™½¹Ðµ™…µ¥±äè€‰%	4A±•à5½¹¼ˆ°µ½¹½ÍÁ…”ì(€™½¹ÐµÍ¥é”è€ÈÁÁàì(€™½¹ÐµÝ•¥¡Ðè€ÔÈÀì)ô((¹É••¥ÁÐµÑ½Ñ…°€øÍµ…±°ì(€½±½ÈèÙ…È ´µÑ•…°µ‘…É¬¤ì)ô((¹Ñ½…ÍÐì(€Á½Í¥Ñ¥½¸è™¥á•ì(€èµ¥¹‘•àè€àÀì(€É¥¡Ðè€ÈÑÁàì(€‰½ÑÑ½´è€ÈÑÁàì(€‘¥ÍÁ±…äè™±•àì(€µ¥¸µ¡•¥¡Ðè€ÐÙÁàì(€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€…Àè€åÁàì(€µ…àµÝ¥‘Ñ èµ¥¸ ÐÈÁÁà°…±Œ ÄÀÁÙÜ€´€ÌÉÁà¤¤ì(€Á…‘‘¥¹œè€À€ÄÑÁàì(€½±½Èè€™™™™™˜ì(€™½¹ÐµÍ¥é”è€ÄÍÁàì(€™½¹ÐµÝ•¥¡Ðè€ÔäÀì(€‰…­É½Õ¹è€ŒÈÈÌÄÉ”ì(€‰½É‘•Èè€ÅÁàÍ½±¥€ŒÐÜØÀÕˆì(€‰½É‘•ÈµÉ…‘¥ÕÌè€ÙÁàì(€‰½àµÍ¡…‘½ÜèÙ…È ´µÍ¡…‘½Ü¤ì(€…¹¥µ…Ñ¥½¸èÑ½…ÍÐµ¥¸€ÄØÁµÌ•…Í”µ½ÕÐì)ô((¹Ñ½…ÍÐÍÙœì(€½±½Èè€ŒÝ‰Å‰˜ì)ô((¹ÍÁ¥¸ì(€…¹¥µ…Ñ¥½¸èÍÁ¥¸€àÔÁµÌ±¥¹•…È¥¹™¥¹¥Ñ”ì)ô()­•å™É…µ•ÌÍÁ¥¸ì(€Ñ¼ì(€€€ÑÉ…¹Í™½É´èÉ½Ñ…Ñ” ÌØÁ‘•œ¤ì(€ô)ô()­•å™É…µ•Ì‘É…Ý•Èµ¥¸ì(€™É½´ì(€€€½Á…¥Ñäè€Àì(€€€ÑÉ…¹Í™½É´èÑÉ…¹Í±…Ñ•` ÈáÁà¤ì(€ô)ô()­•å™É…µ•ÌÑ½…ÍÐµ¥¸ì(€™É½´ì(€€€½Á…¥Ñäè€Àì(€€€ÑÉ…¹Í™½É´èÑÉ…¹Í±…Ñ•d áÁà¤ì(€ô)ô()µ•‘¥„€¡µ…àµÝ¥‘Ñ è€ÄÀÐÁÁà¤ì(€€¹…ÁÀµÍ¡•±°ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÜáÁàµ¥¹µ…à À°€Å™È¤ì(€ô((€€¹Í¥‘•‰…Èì(€€€Á…‘‘¥¹œµÉ¥¡Ðè€ÄÁÁàì(€€€Á…‘‘¥¹œµ±•™Ðè€ÄÁÁàì(€ô((€€¹‰É…¹ì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹Ðè•¹Ñ•Èì(€€€Á…‘‘¥¹œè€Àì(€ô((€€¹‰É…¹µÝ½É°(€€¹¹…Øµ¥Ñ•´€øÍÁ…¸°(€€¹Í¥‘•‰…Èµ™½½Ðì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹¹…Øµ¥Ñ•´ì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€€€©ÕÍÑ¥™äµ¥Ñ•µÌè•¹Ñ•Èì(€€€Á…‘‘¥¹œè€Àì(€ô((€€¹ÁÕ±Í”µ‘…Ñ”ì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹½É‘•ÉÌµÑ…‰±”Ñ é¹Ñ µ¡¥± È¤°(€€¹½É‘•ÉÌµÑ…‰±”Ñé¹Ñ µ¡¥± È¤ì(€€€Ý¥‘Ñ è€ÈÈ”ì(€ô((€€¹½É‘•ÉÌµÑ…‰±”Ñ é¹Ñ µ¡¥± Ì¤°(€€¹½É‘•ÉÌµÑ…‰±”Ñé¹Ñ µ¡¥± Ì¤ì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Ìì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð Ì°µ¥¹µ…à ÄÈÁÁà°€Å™È¤¤ì(€ô((€€¹‘¥É•Ñ½Éäµ½Ù•É…”ì(€€€É¥µ½±Õµ¸è€Ä€¼€´Äì(€€€µ¥¸µ¡•¥¡Ðè€ÜÑÁàì(€€€‰½É‘•ÈµÑ½Àè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹…Ñ…±½œµÑ…‰±”Ñ é¹Ñ µ¡¥± Ì¤°(€€¹…Ñ…±½œµÑ…‰±”Ñé¹Ñ µ¡¥± Ì¤ì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹…Ñ…±½œµÑ…‰±”Ñ é¹Ñ µ¡¥± È¤°(€€¹…Ñ…±½œµÑ…‰±”Ñé¹Ñ µ¡¥± È¤ì(€€€Ý¥‘Ñ è€Èä”ì(€ô((€€¹…Ñ…±½œµÑ…‰±”Ñ é¹Ñ µ¡¥± Ð¤°(€€¹…Ñ…±½œµÑ…‰±”Ñé¹Ñ µ¡¥± Ð¤ì(€€€Ý¥‘Ñ è€ÈØ”ì(€ô)ô()µ•‘¥„€¡µ…àµÝ¥‘Ñ è€àÀÁÁà¤ì(€€¹…ÁÀµÍ¡•±°ì(€€€‘¥ÍÁ±…äè‰±½¬ì(€ô((€€¹Í¥‘•‰…Èì(€€€Á½Í¥Ñ¥½¸èÍÑ…Ñ¥Œì(€€€‘¥ÍÁ±…äè™±•àì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€€€¡•¥¡Ðè€ÔáÁàì(€€€™±•àµ‘¥É•Ñ¥½¸èÉ½Üì(€€€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹ÐèÍÁ…”µ‰•ÑÝ••¸ì(€€€Á…‘‘¥¹œè€áÁà€ÄÑÁàì(€€€‰½É‘•ÈµÉ¥¡Ðè€Àì(€€€‰½É‘•Èµ‰½ÑÑ½´è€ÅÁàÍ½±¥€ŒÉˆÍˆÌàì(€ô((€€¹‰É…¹ì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹Ðè™±•àµÍÑ…ÉÐì(€ô((€€¹‰É…¹µÝ½Éì(€€€‘¥ÍÁ±…äè¥¹±¥¹”ì(€ô((€€¹ÁÉ¥µ…Éäµ¹…Øì(€€€‘¥ÍÁ±…äè™±•àì(€€€…Àè€ÑÁàì(€€€µ…É¥¸è€Àì(€€€µ…É¥¸µ±•™Ðè…ÕÑ¼ì(€ô((€€¹¹…Øµ¥Ñ•´ì(€€€Ý¥‘Ñ è€ÐÁÁàì(€€€¡•¥¡Ðè€ÐÁÁàì(€ô((€€¹Ý½É­ÍÁ…”ì(€€€Á…‘‘¥¹œè€ÈÉÁà€ÄÙÁà€ÌÙÁàì(€ô((€€¹Ý½É­ÍÁ…”µ¡•…‘•Èì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…±¥¸µ¥Ñ•µÌèÍÑ…ÉÐì(€€€…Àè€ÄáÁàì(€ô((€€¹¡•…‘•Èµ…Ñ¥½¹Ìì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€ô((€€¹Í•…É µ½¹ÑÉ½°ì(€€€Ý¥‘Ñ è…ÕÑ¼ì(€€€™±•àè€Äì(€ô((€€¹ÁÕ±Í”µÍÑÉ¥Àì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð Ì°µ¥¹µ…à À°€Å™È¤¤ì(€€€µ¥¸µ¡•¥¡Ðè…ÕÑ¼ì(€€€…Àè€ÄáÁàì(€€€µ…É¥¸µÑ½Àè€ÈÉÁàì(€ô((€€¹ÁÕ±Í”µµ…¥¸ì(€€€É¥µ½±Õµ¸è€Ä€¼€´Äì(€ô((€€¹ÁÕ±Í”µ‘…Ñ”ì(€€€É¥µ½±Õµ¸è€Ä€¼€´Äì(€€€µ…É¥¸µ±•™Ðè€Àì(€ô((€€¹ÁÕ±Í”µ‘¥Ù¥‘•Èì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹ÍÑ…ÑÕÌµÉ…¥°ì(€€€‘¥ÍÁ±…äè‰±½¬ì(€€€Á…‘‘¥¹œè€ÄÉÁà€ÄÑÁàì(€ô((€€¹É…¥°µ¥¹ÑÉ¼ì(€€€‘¥ÍÁ±…äè™±•àì(€€€…±¥¸µ¥Ñ•µÌè‰…Í•±¥¹”ì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹ÐèÍÁ…”µ‰•ÑÝ••¸ì(€€€Á…‘‘¥¹œè€À€À€ÄÁÁàì(€€€‰½É‘•ÈµÉ¥¡Ðè€Àì(€€€‰½É‘•Èµ‰½ÑÑ½´è€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹É…¥°µ¥¹ÑÉ¼ÍÑÉ½¹œì(€€€™½¹ÐµÍ¥é”è€ÈÁÁàì(€ô((€€¹É…¥°µÑÉ…¬ì(€€€Á…‘‘¥¹œè€áÁà€À€Àì(€ô((€€¹É…¥°µ…¹•±±•ì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€€€µ…É¥¸è€áÁà€À€Àì(€€€Á…‘‘¥¹œè€ÄÁÁà€À€Àì(€€€‰½É‘•ÈµÑ½Àè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€€€‰½É‘•Èµ±•™Ðè€Àì(€ô((€€¹½É‘•ÉÌµÑ…‰±”µÝÉ…Àì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹½É‘•ÉÌµµ½‰¥±”ì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€áÁàì(€ô((€€¹½É‘•Èµµ½‰¥±”µÉ½Üì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€ÄÉÁàì(€€€Á…‘‘¥¹œè€ÄÑÁàì(€€€‰…­É½Õ¹èÙ…È ´µÁ…Á•È¤ì(€€€‰½É‘•Èè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€€€‰½É‘•Èµ±•™Ðè€ÍÁàÍ½±¥Ù…È ´µ½‰…±Ð¤ì(€€€‰½É‘•ÈµÉ…‘¥ÕÌè€ÙÁàì(€ô((€€¹½É‘•Èµµ½‰¥±”µÉ½Ü¡•…‘•È°(€€¹µ½‰¥±”µ½É‘•Èµµ•Ñ„°(€€¹µ½‰¥±”µ…Ñ¥½¹Ìì(€€€‘¥ÍÁ±…äè™±•àì(€€€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹ÐèÍÁ…”µ‰•ÑÝ••¸ì(€€€…Àè€ÄÉÁàì(€ô((€€¹½É‘•Èµµ½‰¥±”µÉ½Ü¡•…‘•È€ø‘¥Øì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€ÍÁàì(€€€µ¥¸µÝ¥‘Ñ è€Àì(€ô((€€¹½É‘•Èµµ½‰¥±”µÉ½Ü¡•…‘•ÈÍÑÉ½¹œì(€€€½Ù•É™±½Üè¡¥‘‘•¸ì(€€€™½¹ÐµÍ¥é”è€ÄÑÁàì(€€€Ñ•áÐµ½Ù•É™±½Üè•±±¥ÁÍ¥Ìì(€€€Ý¡¥Ñ”µÍÁ…”è¹½ÝÉ…Àì(€ô((€€¹ÍÑ…ÑÕÌµÁ¥±°ì(€€€™±•àè€À€À…ÕÑ¼ì(€€€Á…‘‘¥¹œè€ÕÁà€áÁàì(€€€½±½ÈèÙ…È ´µÍÑ…ÑÕÌµ½±½È¤ì(€€€™½¹ÐµÍ¥é”è€ÄÁÁàì(€€€™½¹ÐµÝ•¥¡Ðè€ØÔÀì(€€€‰…­É½Õ¹èÙ…È ´µÍÑ…ÑÕÌµ‰œ¤ì(€€€‰½É‘•ÈµÉ…‘¥ÕÌè€ÑÁàì(€ô((€€¹µ½‰¥±”µ½É‘•Èµµ•Ñ„ì(€€€½±½ÈèÙ…È ´µµÕÑ•¤ì(€€€™½¹ÐµÍ¥é”è€ÄÉÁàì(€ô((€€¹µ½‰¥±”µ½É‘•Èµµ•Ñ„ÍÁ…¸ì(€€€‘¥ÍÁ±…äè™±•àì(€€€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€€€…Àè€ÙÁàì(€ô((€€¹µ½‰¥±”µ½É‘•Èµµ•Ñ„ÍÑÉ½¹œì(€€€½±½ÈèÙ…È ´µ¥¹¬¤ì(€€€™½¹Ðµ™…µ¥±äè€‰%	4A±•à5½¹¼ˆ°µ½¹½ÍÁ…”ì(€€€™½¹ÐµÍ¥é”è€ÄÍÁàì(€ô((€€¹µ½‰¥±”µ…Ñ¥½¹Ìì(€€€™±•àµÝÉ…ÀèÝÉ…Àì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹Ðè™±•àµ•¹ì(€€€Á…‘‘¥¹œµÑ½Àè€ÄÁÁàì(€€€‰½É‘•ÈµÑ½Àè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹‘É…™Ðµµ½‰¥±”µ•‘¥Ðì(€€€µ…É¥¸µÉ¥¡Ðè…ÕÑ¼ì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Ì°(€€¹ÍÕÁÁ±¥•ÉÌµµ•ÑÉ¥Ìì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð È°µ¥¹µ…à À°€Å™È¤¤ì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œì(€€€µ¥¸µ¡•¥¡Ðè€ÜáÁàì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œé¹Ñ µ¡¥± È¤ì(€€€‰½É‘•ÈµÉ¥¡Ðè€Àì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œé¹Ñ µ¡¥± Ì¤ì(€€€‰½É‘•ÈµÑ½Àè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹ÍÕÁÁ±¥•ÉÌµµ•ÑÉ¥Ì€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œé±…ÍÐµ¡¥±ì(€€€É¥µ½±Õµ¸è€Ä€¼€´Äì(€€€‰½É‘•ÈµÑ½Àè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹‘¥É•Ñ½Éäµ½Ù•É…”ì(€€€É¥µ½±Õµ¸è€Èì(€€€‰½É‘•Èµ±•™Ðè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹‘¥É•Ñ½ÉäµÑ…‰±”µÝÉ…Àì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹‘¥É•Ñ½Éäµµ½‰¥±”ì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€áÁàì(€ô((€€¹‘¥É•Ñ½Éäµµ½‰¥±”µÉ½Üì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€ÄÅÁàì(€€€Á…‘‘¥¹œè€ÄÑÁàì(€€€‰…­É½Õ¹èÙ…È ´µÁ…Á•È¤ì(€€€‰½É‘•Èè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€€€‰½É‘•Èµ±•™Ðè€ÍÁàÍ½±¥Ù…È ´µÑ•…°¤ì(€€€‰½É‘•ÈµÉ…‘¥ÕÌè€ÙÁàì(€ô((€€¹‘¥É•Ñ½Éäµµ½‰¥±”µÉ½Ü€ø¡•…‘•Èì(€€€‘¥ÍÁ±…äè™±•àì(€€€µ¥¸µÝ¥‘Ñ è€Àì(€€€…±¥¸µ¥Ñ•µÌè•¹Ñ•Èì(€€€©ÕÍÑ¥™äµ½¹Ñ•¹ÐèÍÁ…”µ‰•ÑÝ••¸ì(€€€…Àè€ÄÉÁàì(€ô((€€¹‘¥É•Ñ½Éäµµ½‰¥±”µÉ½Ü€ø¡•…‘•È€ø‘¥Øì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€µ¥¸µÝ¥‘Ñ è€Àì(€€€…Àè€ÍÁàì(€ô((€€¹‘¥É•Ñ½Éäµµ½‰¥±”µÉ½Ü€ø¡•…‘•ÈÍÑÉ½¹œì(€€€½Ù•É™±½Üè¡¥‘‘•¸ì(€€€™½¹ÐµÍ¥é”è€ÄÑÁàì(€€€Ñ•áÐµ½Ù•É™±½Üè•±±¥ÁÍ¥Ìì(€€€Ý¡¥Ñ”µÍÁ…”è¹½ÝÉ…Àì(€ô((€€¹µ½‰¥±”µ‘¥É•Ñ½Éäµ™…ÑÌì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð Ì°µ¥¹µ…à À°€Å™È¤¤ì(€€€…Àè€ÄÁÁàì(€€€Á…‘‘¥¹œµÑ½Àè€ÄÁÁàì(€€€‰½É‘•ÈµÑ½Àè€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€ô((€€¹µ½‰¥±”µ‘¥É•Ñ½Éäµ™…ÑÌ€øÍÁ…¸ì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€ÍÁàì(€€€½±½ÈèÙ…È ´µµÕÑ•¤ì(€€€™½¹ÐµÍ¥é”è€ÄÁÁàì(€ô((€€¹µ½‰¥±”µ‘¥É•Ñ½Éäµ™…ÑÌÍÑÉ½¹œì(€€€½Ù•É™±½Üè¡¥‘‘•¸ì(€€€½±½ÈèÙ…È ´µ¥¹¬¤ì(€€€™½¹Ðµ™…µ¥±äè€‰%	4A±•à5½¹¼ˆ°µ½¹½ÍÁ…”ì(€€€™½¹ÐµÍ¥é”è€ÄÉÁàì(€€€™½¹ÐµÝ•¥¡Ðè€ÔÈÀì(€€€Ñ•áÐµ½Ù•É™±½Üè•±±¥ÁÍ¥Ìì(€€€Ý¡¥Ñ”µÍÁ…”è¹½ÝÉ…Àì(€ô((€€¹ÍÕÁÁ±¥•Èµ…Ù…Ñ…Èì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€Ý¥‘Ñ è€ÌÙÁàì(€€€¡•¥¡Ðè€ÌÙÁàì(€€€™±•àè€À€À…ÕÑ¼ì(€€€Á±…”µ¥Ñ•µÌè•¹Ñ•Èì(€€€½±½ÈèÙ…È ´µÑ•…°µ‘…É¬¤ì(€€€™½¹Ðµ™…µ¥±äè€‰%	4A±•à5½¹¼ˆ°µ½¹½ÍÁ…”ì(€€€™½¹ÐµÍ¥é”è€ÄÅÁàì(€€€‰…­É½Õ¹è€‘•™”äì(€€€‰½É‘•Èè€ÅÁàÍ½±¥€Œá”Å‘„ì(€€€‰½É‘•ÈµÉ…‘¥ÕÌè€ÕÁàì(€ô((€€¹ÍÕÁÁ±¥•Èµµ½‰¥±”µ½¹Ñ…Ðì(€€€½±½ÈèÙ…È ´µµÕÑ•¤ì(€€€™½¹ÐµÍ¥é”è€ÄÅÁàì(€ô((€€¹±¥¹”µ¥Ñ•´ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÈÙÁàµ¥¹µ…à ÄØÁÁà°€Å™È¤€äÉÁà€ÌÑÁàì(€ô((€€¹¥Ñ•´µ¹…µ”ì(€€€É¥µ½±Õµ¸è€È€¼€Ðì(€ô((€€¹É•µ½Ù”µ¥Ñ•´ì(€€€É¥µ½±Õµ¸è€Ðì(€ô((€€¹¥Ñ•´µÅÕ…¹Ñ¥Ñä°(€€¹¥Ñ•´µÕ¹¥Ð°(€€¹¥Ñ•´µÁÉ¥”ì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÅÕ…¹Ñ¥Ñäì(€€€É¥µ½±Õµ¸è€Èì(€ô((€€¹¥Ñ•´µÕ¹¥Ðì(€€€‘¥ÍÁ±…äè¹½¹”ì(€ô((€€¹¥Ñ•´µÁÉ¥”ì(€€€É¥µ½±Õµ¸è€Ìì(€ô((€€¹½™™•ÈµÉ½Üì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìèµ¥¹µ…à ÄÔÁÁà°€Å™È¤€ÄÀÁÁà€ÌÑÁàì(€ô((€€¹½™™•ÈµÍÕÁÁ±¥•Èì(€€€É¥µ½±Õµ¸è€Ä€¼€Ìì(€ô((€€¹½™™•ÈµÉ½Ü€¹¡•¬µ½¹ÑÉ½°ì(€€€É¥µ½±Õµ¸è€Ä€¼€Ìì(€ô((€€¹½™™•ÈµÉ½Ü€¹É•µ½Ù”µ¥Ñ•´ì(€€€É¥µ½±Õµ¸è€Ìì(€€€É¥µÉ½Üè€Ìì(€ô((€€¹É••¥ÁÐµ½¹Ñ•áÐì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÈáÁàÉ•Á•…Ð È°µ¥¹µ…à À°€Å™È¤¤ì(€ô((€€¹É••¥ÁÐµ½¹Ñ•áÐ€øÍÁ…¸é±…ÍÐµ¡¥±ì(€€€É¥µ½±Õµ¸è€È€¼€´Äì(€ô((€€¹É••¥ÁÐµÙ…±Õ•Ìì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð È°µ¥¹µ…à À°€Å™È¤¤ì(€ô)ô()µ•‘¥„€¡µ…àµÝ¥‘Ñ è€ÔØÁÁà¤ì(€€¹…¹•°µ‘¥…±½œì(€€€Á½Í¥Ñ¥½¸è™¥á•ì(€€€Ñ½Àè€ÔÀ”ì(€€€É¥¡Ðè€ÄÙÁàì(€€€±•™Ðè€ÄÙÁàì(€€€Ý¥‘Ñ è…ÕÑ¼ì(€€€½Ù•É™±½Üµäè…ÕÑ¼ì(€€€ÑÉ…¹Í™½É´èÑÉ…¹Í±…Ñ•d ´ÔÀ”¤ì(€ô((€€¹…¹•°µ‘¥…±½œ™½½Ñ•Èì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð È°µ¥¹µ…à À°€Å™È¤¤ì(€ô((€€¹…¹•°µ‘¥…±½œ™½½Ñ•È‰ÕÑÑ½¸ì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€€€µ¥¸µÝ¥‘Ñ è€Àì(€€€¡•¥¡Ðè…ÕÑ¼ì(€€€µ¥¸µ¡•¥¡Ðè€ÐÑÁàì(€€€Á…‘‘¥¹œè€áÁà€ÄÁÁàì(€€€Ý¡¥Ñ”µÍÁ…”è¹½Éµ…°ì(€ô((€€¹É•Í½±ÕÑ¥½¸µ‘¥…±½œ™½½Ñ•Èì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€ô((€€¹Ý½É­ÍÁ…”µ¡•…‘•È Äì(€€€™½¹ÐµÍ¥é”è€ÈáÁàì(€ô((€€¹¡•…‘•Èµ…Ñ¥½¹Ìì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìèµ¥¹µ…à À°€Å™È¤…ÕÑ¼ì(€ô((€€¹¡•…‘•Èµ…Ñ¥½¹Ì€¹ÁÉ¥µ…Éäµ‰ÕÑÑ½¸ì(€€€Ý¥‘Ñ è€ÐÉÁàì(€€€Á…‘‘¥¹œè€Àì(€€€™½¹ÐµÍ¥é”è€Àì(€ô((€€¹ÁÕ±Í”µÍÑÉ¥Àì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€ô((€€¹ÁÕ±Í”µµ…¥¸ì(€€€É¥µ½±Õµ¸è…ÕÑ¼ì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Ì°(€€¹ÍÕÁÁ±¥•ÉÌµµ•ÑÉ¥Ìì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€ô((€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œ°(€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œé¹Ñ µ¡¥± È¤°(€€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œé¹Ñ µ¡¥± Ì¤°(€€¹ÍÕÁÁ±¥•ÉÌµµ•ÑÉ¥Ì€¹‘¥É•Ñ½Éäµµ•ÑÉ¥Œé±…ÍÐµ¡¥±ì(€€€É¥µ½±Õµ¸è…ÕÑ¼ì(€€€‰½É‘•ÈµÉ¥¡Ðè€Àì(€€€‰½É‘•Èµ‰½ÑÑ½´è€ÅÁàÍ½±¥Ù…È ´µ±¥¹”¤ì(€€€‰½É‘•ÈµÑ½Àè€Àì(€ô((€€¹‘¥É•Ñ½Éäµ½Ù•É…”ì(€€€É¥µ½±Õµ¸è…ÕÑ¼ì(€€€‰½É‘•ÈµÑ½Àè€Àì(€€€‰½É‘•Èµ±•™Ðè€Àì(€ô((€€¹µ½‰¥±”µ‘¥É•Ñ½Éäµ™…ÑÌì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð È°µ¥¹µ…à À°€Å™È¤¤ì(€ô((€€¹É…¥°µÑÉ…¬ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð Ð°€ÄÀáÁà¤ì(€ô((€€¹½É‘•ÉÌµ¡•…‘¥¹œ€ø‘¥Øì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€…Àè€ÅÁàì(€ô((€€¹…Ñ…±½œµ¡•…‘¥¹œì(€€€…±¥¸µ¥Ñ•µÌèÍÑÉ•Ñ ì(€€€™±•àµ‘¥É•Ñ¥½¸è½±Õµ¸ì(€ô((€€¹…Ñ…±½œµ¡•…‘¥¹œ€¹…Ñ…±½œµ…Ù…¥±…‰¥±¥Ñäì(€€€‘¥ÍÁ±…äè™±•àì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€ô((€€¹…Ñ…±½œµ…Ù…¥±…‰¥±¥Ñä‰ÕÑÑ½¸ì(€€€™±•àè€Ä€Ä€Àì(€€€Á…‘‘¥¹œè€À€ÙÁàì(€ô((€€¹™½É´µÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€ô((€€¹½É‘•Èµ‘É…Ý•Èì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€ô((€€¹‘É…Ý•Èµ¡•…‘•È°(€€¹½É‘•Èµ™½É´ì(€€€Á…‘‘¥¹œµÉ¥¡Ðè€ÄÙÁàì(€€€Á…‘‘¥¹œµ±•™Ðè€ÄÙÁàì(€ô((€€¹±¥¹”µ¥Ñ•´ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÈÑÁàµ¥¹µ…à ÜÉÁà°€Å™È¤€ØáÁà€äÉÁà€ÌÑÁàì(€ô((€€¹¥Ñ•´µ¹…µ”ì(€€€É¥µ½±Õµ¸è€È€¼€Øì(€€€É¥µÉ½Üè€Äì(€ô((€€¹É•µ½Ù”µ¥Ñ•´ì(€€€É¥µ½±Õµ¸è€Ôì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÅÕ…¹Ñ¥Ñäì(€€€É¥µ½±Õµ¸è€Èì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÕ¹¥Ð°(€€¹¥Ñ•´µÁÉ¥”ì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€¡•¥¡Ðè€ÐÁÁàì(€€€…±¥¸µ½¹Ñ•¹Ðè•¹Ñ•Èì(€€€©ÕÍÑ¥™äµ¥Ñ•µÌèÍÑ…ÉÐì(€€€…Àè€ÅÁàì(€ô((€€¹¥Ñ•´µÕ¹¥Ðì(€€€É¥µ½±Õµ¸è€Ìì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÁÉ¥”ì(€€€É¥µ½±Õµ¸è€Ðì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÁÉ¥”¥¹ÁÕÐì(€€€Á…‘‘¥¹œµÉ¥¡Ðè€ÕÁàì(€€€Á…‘‘¥¹œµ±•™Ðè€ÕÁàì(€ô((€€¹½™™•ÈµÉ½Üì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìèµ¥¹µ…à À°€Å™È¤€ÌÑÁàì(€ô((€€¹½™™•ÈµÉ½Ü€¹™¥•±°(€€¹½™™•ÈµÍÕÁÁ±¥•È°(€€¹½™™•ÈµÉ½Ü€¹¡•¬µ½¹ÑÉ½°ì(€€€É¥µ½±Õµ¸è€Äì(€ô((€€¹½™™•ÈµÉ½Ü€¹É•µ½Ù”µ¥Ñ•´ì(€€€É¥µ½±Õµ¸è€Èì(€€€É¥µÉ½Üè€Äì(€ô((€€¹É••¥ÁÐµµ•Ñ„µÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€ô((€€¹É••¥ÁÐµ½¹Ñ•áÐì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÈÑÁàµ¥¹µ…à À°€Å™È¤ì(€€€…Àè€áÁà€ÄÁÁàì(€ô((€€¹É••¥ÁÐµ½¹Ñ•áÐ€øÍÁ…¸°(€€¹É••¥ÁÐµ½¹Ñ•áÐ€øÍÁ…¸é±…ÍÐµ¡¥±ì(€€€É¥µ½±Õµ¸è€Èì(€ô((€€¹É••¥ÁÐµ±¥¹”€ø¡•…‘•Èì(€€€…±¥¸µ¥Ñ•µÌè™±•àµÍÑ…ÉÐì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±ÌµÍÕµµ…Éä‘°ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€Å™Èì(€€€…Àè€ÄÉÁàì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±ÌµÉ••¥ÁÐì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÈÑÁàµ¥¹µ…à À°€Å™È¤ì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±ÌµÉ••¥ÁÐ€ø‘¥Øé±…ÍÐµ¡¥±ì(€€€É¥µ½±Õµ¸è€Èì(€€€Ñ•áÐµ…±¥¸è±•™Ðì(€ô((€€¹½É‘•ÈµÑ¥µ•±¥¹”µ•Ù•¹Ðì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÄÙÁàµ¥¹µ…à À°€Å™È¤ì(€ô((€€¹½É‘•ÈµÑ¥µ•±¥¹”µ•Ù•¹ÐÑ¥µ”ì(€€€É¥µ½±Õµ¸è€Èì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±Ìµ™½½Ñ•Èì(€€€…±¥¸µ¥Ñ•µÌèÍÑÉ•Ñ ì(€€€™±•àµ‘¥É•Ñ¥½¸è½±Õµ¸ì(€€€…Àè€ÄÉÁàì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±Ìµ…Ñ¥½¹Ìì(€€€‘¥ÍÁ±…äèÉ¥ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹ÌèÉ•Á•…Ð È°µ¥¹µ…à À°€Å™È¤¤ì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±Ìµ…Ñ¥½¹Ì€ø‰ÕÑÑ½¸ì(€€€Ý¥‘Ñ è€ÄÀÀ”ì(€€€µ¥¸µÝ¥‘Ñ è€Àì(€€€Á…‘‘¥¹œµÉ¥¡Ðè€ÄÁÁàì(€€€Á…‘‘¥¹œµ±•™Ðè€ÄÁÁàì(€ô((€€¹½É‘•Èµ‘•Ñ…¥±Ìµ…Ñ¥½¹Ì€ø‰ÕÑÑ½¸é½¹±äµ¡¥±ì(€€€É¥µ½±Õµ¸è€Ä€¼€´Äì(€ô((€€¹‘É…Ý•Èµ™½½Ñ•Èì(€€€µ…É¥¸è€À€À€´ÈÑÁàì(€€€Á…‘‘¥¹œµÉ¥¡Ðè€Àì(€€€Á…‘‘¥¹œµ±•™Ðè€Àì(€ô((€€¹‘É…Ý•Èµ™½½Ñ•È€¹ÁÉ¥µ…Éäµ‰ÕÑÑ½¸ì(€€€µ¥¸µÝ¥‘Ñ è€ÄÔÉÁàì(€€€Á…‘‘¥¹œè€À€ÄÅÁàì(€ô((€€¹Ñ½…ÍÐì(€€€É¥¡Ðè€ÄÙÁàì(€€€‰½ÑÑ½´è€ÄÙÁàì(€€€±•™Ðè€ÄÙÁàì(€ô)ô()µ•‘¥„€¡µ…àµÝ¥‘Ñ è€ÌÔÁÁà¤ì(€€¹±¥¹”µ¥Ñ•´ì(€€€É¥µÑ•µÁ±…Ñ”µ½±Õµ¹Ìè€ÈÑÁàµ¥¹µ…à À°€Å™È¤€ØáÁà€ÌÑÁàì(€ô((€€¹¥Ñ•´µ¹…µ”ì(€€€É¥µ½±Õµ¸è€È€¼€Ôì(€€€É¥µÉ½Üè€Äì(€ô((€€¹É•µ½Ù”µ¥Ñ•´ì(€€€É¥µ½±Õµ¸è€Ðì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÅÕ…¹Ñ¥Ñäì(€€€É¥µ½±Õµ¸è€Èì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÕ¹¥Ðì(€€€É¥µ½±Õµ¸è€Ìì(€€€É¥µÉ½Üè€Èì(€ô((€€¹¥Ñ•´µÁÉ¥”ì(€€€É¥µ½±Õµ¸è€È€¼€Ðì(€€€É¥µÉ½Üè€Ìì(€ô)ô()µ•‘¥„€¡ÁÉ•™•ÉÌµÉ•‘Õ•µµ½Ñ¥½¸èÉ•‘Õ”¤ì(€€¨°(€€¨èé‰•™½É”°(€€¨èé…™Ñ•Èì(€€€ÍÉ½±°µ‰•¡…Ù¥½Èè…ÕÑ¼€…¥µÁ½ÉÑ…¹Ðì(€€€…¹¥µ…Ñ¥½¸µ‘ÕÉ…Ñ¥½¸è€À¸ÀÅµÌ€…¥µÁ½ÉÑ…¹Ðì(€€€…¹¥µ…Ñ¥½¸µ¥Ñ•É…Ñ¥½¸µ½Õ¹Ðè€Ä€…¥µÁ½ÉÑ…¹Ðì(€€€ÑÉ…¹Í¥Ñ¥½¸µ‘ÕÉ…Ñ¥½¸è€À¸ÀÅµÌ€…¥µÁ½ÉÑ…¹Ðì(€ô)ô(
